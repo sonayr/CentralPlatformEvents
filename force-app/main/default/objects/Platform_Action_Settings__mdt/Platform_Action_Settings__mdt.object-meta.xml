@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used to control configuration options for the platform action centralized Platform Event model.
+
+The platform action handler will only grab the first setting record listed as active. If there are more active they will be ignored until the one prior (via label alphabetical order) is inactived.</description>
+    <label>Platform Action Setting</label>
+    <pluralLabel>Platform Action Settings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

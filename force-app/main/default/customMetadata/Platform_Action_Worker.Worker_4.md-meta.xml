@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Worker 4</label>
+    <protected>false</protected>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Body_Field_Name__c</field>
+        <value xsi:type="xsd:string">JSON_Body__c</value>
+    </values>
+    <values>
+        <field>Body_Field__c</field>
+        <value xsi:type="xsd:string">JSON_Body__c</value>
+    </values>
+    <values>
+        <field>Platform_Event_Api_Name__c</field>
+        <value xsi:type="xsd:string">Platform_Action_Worker_4__e</value>
+    </values>
+    <values>
+        <field>Platform_Event__c</field>
+        <value xsi:type="xsd:string">Platform_Action_Worker_4__e</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enforce_Platform_Event_Type</fullName>
+    <active>true</active>
+    <description>Ensures the Platform_Event field is an object of type PlatfromEvent (i.e. ending in __e)</description>
+    <errorConditionFormula>RIGHT(Platform_Event__r.QualifiedApiName,3) != &apos;__e&apos;</errorConditionFormula>
+    <errorDisplayField>Platform_Event__c</errorDisplayField>
+    <errorMessage>Object must be of type Platform Event</errorMessage>
+</ValidationRule>

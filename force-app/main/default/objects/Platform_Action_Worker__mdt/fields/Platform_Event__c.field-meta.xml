@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Platform_Event__c</fullName>
+    <description>Platform Event representing the Worker Platform which we be handling work from the main action__e event.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Must be a Platform Event Object</inlineHelpText>
+    <label>Platform Event</label>
+    <referenceTo>EntityDefinition</referenceTo>
+    <relationshipLabel>Platform_Action_Workers</relationshipLabel>
+    <relationshipName>Platform_Action_Workers</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Body_Field__c</fullName>
+    <description>Field on the Platform Event worker that will hold the JSON body message</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Long Text Field of Max size on Platform Event</inlineHelpText>
+    <label>Body Field</label>
+    <metadataRelationshipControllingField>Platform_Action_Worker__mdt.Platform_Event__c</metadataRelationshipControllingField>
+    <referenceTo>FieldDefinition</referenceTo>
+    <relationshipLabel>Platform_Action_Workers</relationshipLabel>
+    <relationshipName>Platform_Action_Workers</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

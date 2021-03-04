@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enforce_LongTextArea_Body_Type</fullName>
+    <active>true</active>
+    <description>The Platform Event field chosen must be a long text area field of max length (max length is verified in code)</description>
+    <errorConditionFormula>Body_Field__r.DataType != &apos;LongTextArea&apos;</errorConditionFormula>
+    <errorDisplayField>Body_Field__c</errorDisplayField>
+    <errorMessage>Body field on Platform Event must be a Long Text Area field of Max length</errorMessage>
+</ValidationRule>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enforce_Worker_Batch_Range</fullName>
+    <active>true</active>
+    <description>Enforces worker batch range to be within 1-2000</description>
+    <errorConditionFormula>Or(
+ Worker_Batch_Size__c &lt; 1,
+ Worker_Batch_Size__c &gt; 2000
+)</errorConditionFormula>
+    <errorDisplayField>Worker_Batch_Size__c</errorDisplayField>
+    <errorMessage>Worker Batch Size must be within 1-2000</errorMessage>
+</ValidationRule>
