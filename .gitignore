@@ -4,6 +4,10 @@
 
 # Salesforce cache
 .sfdx/
+.vscode/
+.eslintignore
+.prettierignore
+.prettierrc
 .localdevserver/
 
 # LWC VSCode autocomplete
