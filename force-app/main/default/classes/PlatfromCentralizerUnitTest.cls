@@ -11,12 +11,14 @@ History:
 @isTest
 private class PlatfromCentralizerUnitTest {
 
+    private static final String FAKE_ACTION_JSON = '{"action":"PlatformActionUtil.testableAction"}';
+    private static final String NAMESPACE = 'CPE';
     private static final String TEST_CALLABLE = 'PlatformActionUtil.testableAction';
     
     @IsTest
     static void CreateValidAction(){
         Test.startTest();
-        List<CallableAction> eventInfo = new CallableAction[]{new CallableAction(null,TEST_CALLABLE,'test',null)};
+        List<CallableAction> eventInfo = new CallableAction[]{new CallableAction(NAMESPACE,TEST_CALLABLE,'test',null)};
         String JSONMessage = JSON.serialize(eventInfo);
         Action__e action = new Action__e(JSON_Body__c = JSONMessage);
         Eventbus.publish(action);
@@ -31,12 +33,12 @@ private class PlatfromCentralizerUnitTest {
         
         // Setup static class list to accept test class
         List<String> callableList = PlatformActionUtil.getActiveCallables();
-        callableList.add(TEST_CALLABLE.toLowerCase());
+        callableList.add((NAMESPACE + '.' + TEST_CALLABLE).toLowerCase());
         PlatformActionUtil.activeCallables = callableList;
-
+        Map<String,Object> args = ( Map<String,Object>)JSON.deserializeUntyped(FAKE_ACTION_JSON);
         Test.startTest();
         System.assert(!PlatformActionUtil.testCalled,'Test call should be set to false before a platform event is fired'); 
-        CallableAction[] eventInfo = new CallableAction[]{new CallableAction(TEST_CALLABLE,'test',null)};
+        CallableAction[] eventInfo = new CallableAction[]{new CallableAction(NAMESPACE,TEST_CALLABLE,'test',args)};
         String JSONMessage = JSON.serialize(eventInfo);
         Platform_Action_Worker_1__e actions = new Platform_Action_Worker_1__e(JSON_Body__c = JSONMessage);
         Eventbus.publish(actions);
@@ -49,7 +51,7 @@ private class PlatfromCentralizerUnitTest {
     @IsTest
     static void bulkActionTest(){
         Test.startTest();
-        CallableAction[] eventInfo = new CallableAction[]{new CallableAction(TEST_CALLABLE,'test',null)};
+        CallableAction[] eventInfo = new CallableAction[]{new CallableAction(NAMESPACE,TEST_CALLABLE,'test',null)};
         Action__e[] actions = new Action__e[]{};
         Integer maxBatchSize = PlatformActionUtil.getBatchSizeSetting();
         String JSONMessage = JSON.serialize(eventInfo);

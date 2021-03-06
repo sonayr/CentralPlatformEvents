@@ -24,13 +24,19 @@ public class PlatformWorkerTriggerLogic extends BasePlatformTriggerLogic{
 
     // Code that happens for each loop of the given trigger object (i.e. creating list)
     override protected void loopLogic(SObject event){
-        List<CallableAction> eventActions = (List<CallableAction>)JSON.deserializeStrict((String)event.get(getWorkerBodyName()),List<CallableAction>.class);
-        for(CallableAction action : eventActions){
-            if(checkActiveClass(action.className)){
-                callAction(action);
-            } else {
-                // Debug list for post
-                inactiveClassList.add(action.className);
+        List<Object> eventActions = (List<Object>)JSON.deserializeUnTyped((String)event.get(getWorkerBodyName()));
+        for(Object callableDetails : eventActions){
+            try{
+                Map<String,Object> details = (Map<String,Object>)callableDetails;
+                String className = (String)details.get('className');
+                if(checkActiveClass(className)){
+                    callAction(details);
+                } else {
+                    // Debug list for post
+                    inactiveClassList.add(className);
+                }
+            } catch(TypeException excp){
+                System.debug('🌪🌪🌪 Cast exception' + excp.getMessage());
             }
         }
     }
@@ -66,14 +72,18 @@ public class PlatformWorkerTriggerLogic extends BasePlatformTriggerLogic{
         return PlatformActionUtil.getActiveCallables().contains(className?.toLowerCase());
     }
 
-    private void callAction(CallableAction action){
-        Type callableClass = Type.forName(action.nameSpace,action.className);
+    private void callAction(Map<String,Object> callableDetails){
+        String className = (String)callableDetails.get('className');
+        String action = (String)callableDetails.get('action');
+        Map<String,Object> args = (Map<String,Object>)callableDetails.get('args');
+
+        Type callableClass = Type.forName(className);
         if(Callable.class.isAssignableFrom(callableClass)){
             // Class is a callable
-            ((Callable)callableClass.newInstance()).call(action.action, action.args);
+            ((Callable)callableClass.newInstance()).call(action, args);
         } else {
             // Debug list for post
-            invalidClassList.add(action.className);
+            invalidClassList.add(className);
         }
     }
 

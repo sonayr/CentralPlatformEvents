@@ -8,11 +8,12 @@
             "versionNumber": "0.1.0.NEXT"
         }
     ],
-    "namespace": "CME",
+    "namespace": "CPE",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "50.0",
     "packageAliases": {
         "CentralPlatfromEvents": "0Ho1I000000KzBKSA0",
-        "CentralPlatfromEvents@1.0.0-0-master": "04t1I000003RnQ2QAK"
+        "CentralPlatfromEvents@1.0.0-0-master": "04t1I000003RnQ2QAK",
+        "CentralPlatfromEvents@1.0.1-0-master": "04t1I000003RnQ7QAK"
     }
 }

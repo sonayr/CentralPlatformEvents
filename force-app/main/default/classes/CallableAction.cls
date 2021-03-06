@@ -41,6 +41,6 @@ global class CallableAction {
 
     public CallableAction(String nameSpace, String className, String action, Map<String,Object> args){
         this(className,action,args);
-        this.nameSpace = nameSpace;
+        this.className = nameSpace == null ? this.className : nameSpace + '.' +  this.className;
     }
 }
