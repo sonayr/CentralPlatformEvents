@@ -29,8 +29,10 @@ public class PlatformWorkerTriggerLogic extends BasePlatformTriggerLogic{
             try{
                 Map<String,Object> details = (Map<String,Object>)callableDetails;
                 String className = (String)details.get('className');
-                if(checkActiveClass(className)){
-                    callAction(details);
+                String nameSpace = (String)details.get('nameSpace');
+
+                if(checkActiveClass(nameSpace,className)){
+                    callAction(nameSpace,className,details);
                 } else {
                     // Debug list for post
                     inactiveClassList.add(className);
@@ -68,16 +70,15 @@ public class PlatformWorkerTriggerLogic extends BasePlatformTriggerLogic{
         return this.workerBodyFieldName;
     }
 
-    private Boolean checkActiveClass(String className){
-        return PlatformActionUtil.getActiveCallables().contains(className?.toLowerCase());
+    private Boolean checkActiveClass(String nameSpace, String className){
+        return PlatformActionUtil.getActiveCallables().get(nameSpace)?.contains(className?.toLowerCase());
     }
 
-    private void callAction(Map<String,Object> callableDetails){
-        String className = (String)callableDetails.get('className');
+    private void callAction(String nameSpace,String className,Map<String,Object> callableDetails){
         String action = (String)callableDetails.get('action');
         Map<String,Object> args = (Map<String,Object>)callableDetails.get('args');
 
-        Type callableClass = Type.forName(className);
+        Type callableClass = Type.forName(nameSpace,className);
         if(Callable.class.isAssignableFrom(callableClass)){
             // Class is a callable
             ((Callable)callableClass.newInstance()).call(action, args);

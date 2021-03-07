@@ -32,10 +32,10 @@ private class PlatfromCentralizerUnitTest {
     static void IsolateWorker(){
         
         // Setup static class list to accept test class
-        List<String> callableList = PlatformActionUtil.getActiveCallables();
-        callableList.add((NAMESPACE + '.' + TEST_CALLABLE).toLowerCase());
-        PlatformActionUtil.activeCallables = callableList;
+        PlatformActionUtil.getActiveCallables();
+        PlatformActionUtil.activeCallables.put(NAMESPACE, new List<String>{TEST_CALLABLE.toLowerCase()});
         Map<String,Object> args = ( Map<String,Object>)JSON.deserializeUntyped(FAKE_ACTION_JSON);
+
         Test.startTest();
         System.assert(!PlatformActionUtil.testCalled,'Test call should be set to false before a platform event is fired'); 
         CallableAction[] eventInfo = new CallableAction[]{new CallableAction(NAMESPACE,TEST_CALLABLE,'test',args)};

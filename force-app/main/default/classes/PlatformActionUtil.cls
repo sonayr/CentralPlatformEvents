@@ -14,7 +14,7 @@ public class PlatformActionUtil {
     private final static Integer OVER_RIDE_DEFAULT_BATCH_SIZE = 1;
     private final static Integer OVER_RIDE_DEFAULT_RETRY_SIZE = 0;
     private static Platform_Action_Settings__mdt settings;
-    @TestVisible private static List<string> activeCallables;
+    @TestVisible private static Map<String,List<String>> activeCallables;
     @TestVisible private static Boolean testCalled = false;
     
     /*************************Method**********************************
@@ -50,11 +50,16 @@ public class PlatformActionUtil {
     
     @return List of Strings represnting lower case class names
     *****************************************************************/
-    static public List<String> getActiveCallables(){
+    static public Map<String,List<String>> getActiveCallables(){
         if(activeCallables == null){
-            activeCallables = new List<String>();
-            for(Platform_Callables__mdt callable : [SELECT label FROM Platform_Callables__mdt WHERE active__c = true]){
-                activeCallables.add(callable.label.toLowerCase());
+            activeCallables = new Map<String,List<String>>();
+            for(Platform_Callables__mdt callable : [SELECT NamespacePrefix, label FROM Platform_Callables__mdt WHERE active__c = true]){
+                String lowercaseLabel = callable.label.toLowerCase();
+                if(activeCallables.containsKey(callable.NamespacePrefix)){
+                    activeCallables.get(callable.NamespacePrefix).add(lowercaseLabel);
+                } else {
+                    activeCallables.put(callable.NamespacePrefix,new List<String>{lowercaseLabel});
+                }
             }
         }
         return activeCallables;
